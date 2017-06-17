@@ -9,28 +9,27 @@ class Upload
   post do
     FileUtils.mkdir_p "#{ENV['HOME']}/.la"
     db = Sequel.sqlite "#{ENV['HOME']}/.la/db.sqlite"
-    db.run "CREATE VIRTUAL TABLE sentences USING fts5(string);"
+    db.run "CREATE VIRTUAL TABLE sentences USING fts5(sentence, language, tatoeba_id);"
 
-    file = request.params['dump'][:tempfile]
-    file.each_line.lazy.each_slice(10000) do |chunk|
-      sentences = []
+    e = request.params['dump'][:tempfile].each_line.lazy
+    batch = e.first 100000
+    sentences = []
 
-      chunk.each do |line|
-        #tatoeba_id, language, sentence = CSV.parse(line, col_sep: "\t", quote_char: "\x00").first
+    until batch.empty?
+      batch.each do |line|
         tatoeba_id, language, sentence = line.split "\t"
-        sentences << sentence if language == 'eng'
+        sentences << [sentence, language, tatoeba_id] if language == 'eng'
       end
 
-      db.transaction do
-        sentences.each_with_index do |sentence, index|
-          db[:sentences] << { rowid: index, string: sentence }
-        end
-      end
-      puts 'thousand'
+      p batch.first
+      db[:sentences].import [:sentence, :language, :tatoeba_id], sentences
+      p batch.last
+
+      batch = e.first 100000
+      sentences.clear
     end
 
-    puts 'the end'
-    response.redirect '/import'
+    "#{request.params['dump'][:filename]} was imported."
   end
 end
 
