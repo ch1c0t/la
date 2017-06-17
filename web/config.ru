@@ -7,8 +7,8 @@ class Upload
   include Hobby
 
   post do
-    FileUtils.mkdir_p '~/.la'
-    db = Sequel.sqlite '~/.la/db.sqlite'
+    FileUtils.mkdir_p "#{ENV['HOME']}/.la"
+    db = Sequel.sqlite "#{ENV['HOME']}/.la/db.sqlite"
     db.run "CREATE VIRTUAL TABLE sentences USING fts5(string);"
 
     file = request.params['dump'][:tempfile]
