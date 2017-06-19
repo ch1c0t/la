@@ -11,11 +11,16 @@ class Upload
     db = Sequel.sqlite "#{ENV['HOME']}/.la/db.sqlite"
     db.run "CREATE VIRTUAL TABLE sentences USING fts5(sentence, language, tatoeba_id);"
 
+    puts 'before'
+    require 'pry'
+    binding.pry
     e = request.params['dump'][:tempfile].each_line.lazy
     batch = e.first 100000
     sentences = []
+    puts 'starting loop'
 
     until batch.empty?
+      puts 'inside loop'
       batch.each do |line|
         tatoeba_id, language, sentence = line.split "\t"
         sentences << [sentence, language, tatoeba_id] if language == 'eng'

@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+case ARGV[0]
+when 'import'
+  require_relative '../cli/import'
+  La::Import[*ARGV[1..-1]]
+end
