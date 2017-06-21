@@ -1,3 +1,11 @@
+PATH
+  remote: .
+  specs:
+    la (0.0.0)
+      hobby-pages
+      sequel
+      sqlite3
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -11,7 +19,7 @@ GEM
     execjs (2.7.0)
     hobby (0.0.8)
       rack
-    hobby-pages (0.0.1)
+    hobby-pages (0.0.2)
       coffee-script
       hobby (>= 0.0.8)
       sass
@@ -42,10 +50,8 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
-  hobby-pages
+  la!
   pry
-  sequel
-  sqlite3
 
 BUNDLED WITH
    1.15.1
