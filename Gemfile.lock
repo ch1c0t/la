@@ -1,13 +1,6 @@
-PATH
-  remote: .
-  specs:
-    la (0.0.0)
-      hobby-pages
-      sequel
-      sqlite3
-
 GEM
   remote: https://rubygems.org/
+  remote: https://rails-assets.org/
   specs:
     awesome_print (1.8.0)
     coderay (1.1.1)
@@ -17,11 +10,15 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     execjs (2.7.0)
-    hobby (0.0.8)
+    foundation-scss (6.3.1.0)
+      sass_paths
+    hobby (0.0.9)
       rack
-    hobby-pages (0.0.2)
+    hobby-json (0.0.4)
+      rack
+    hobby-pages (0.0.5)
       coffee-script
-      hobby (>= 0.0.8)
+      hobby (>= 0.0.9)
       sass
       slim
       sprockets
@@ -31,8 +28,12 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    puma (3.9.1)
     rack (2.0.3)
+    rails-assets-angular (1.6.4)
     sass (3.4.24)
+    sass_paths (2.0.0)
+      sass (~> 3.2)
     sequel (4.47.0)
     slim (3.0.8)
       temple (>= 0.7.6, < 0.9)
@@ -49,9 +50,15 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  awesome_print
-  la!
-  pry
+  awesome_print!
+  foundation-scss!
+  hobby-json!
+  hobby-pages!
+  pry!
+  puma!
+  rails-assets-angular!
+  sequel!
+  sqlite3!
 
 BUNDLED WITH
    1.15.1
