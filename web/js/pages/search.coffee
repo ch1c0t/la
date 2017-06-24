@@ -35,3 +35,9 @@ angular.module 'Search', []
     (s, data) ->
       s.models = data.models
   ]
+
+  .filter 'html', [
+    '$sce'
+
+    (sce) -> sce.trustAsHtml
+  ]
