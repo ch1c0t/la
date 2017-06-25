@@ -14,13 +14,14 @@ module La
       include JSON
 
       post do
-        collocation = json['collocation']
+        collocation, offset = json.values_at 'collocation', 'offset'
 
-        query = 'SELECT rowid,* FROM sentences WHERE sentence MATCH ? LIMIT ?'
+        query = 'SELECT rowid,* FROM sentences WHERE sentence MATCH ? LIMIT ? OFFSET ?'
         quoted_collocation = '"' + collocation + '"'
-        limit = 16
+        limit = 8
+        offset = offset || 0
 
-        DB[query, quoted_collocation, limit].to_a
+        DB[query, quoted_collocation, limit, offset].to_a
           .map do |h|
             h[:sentence].sub(collocation) { "<mark>#{collocation}</mark>" }
           end
