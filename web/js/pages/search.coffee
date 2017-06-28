@@ -1,6 +1,7 @@
 #=require angular
+#=require ngInfiniteScroll
 
-angular.module 'Search', []
+angular.module 'Search', ['infinite-scroll']
   .factory 'Data', [
     ->
       models:
@@ -56,11 +57,3 @@ angular.module 'Search', []
 
     (sce) -> sce.trustAsHtml
   ]
-
-  .directive 'whenScrolled', ->
-    (scope, element, attribute) ->
-      raw = element[0]
-
-      element.bind 'scroll', ->
-        if (raw.scrollTop + raw.offsetHeigth) >= raw.scrollHeigth
-          scope.$apply attribute.whenScrolled
