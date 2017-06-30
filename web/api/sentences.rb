@@ -16,15 +16,19 @@ module La
       post do
         collocation, offset = json.values_at 'collocation', 'offset'
 
-        query = 'SELECT rowid,* FROM sentences WHERE sentence MATCH ? LIMIT ? OFFSET ?'
-        quoted_collocation = '"' + collocation + '"'
-        limit = 8
-        offset = offset || 0
+        if collocation
+          query = 'SELECT rowid,* FROM sentences WHERE sentence MATCH ? LIMIT ? OFFSET ?'
+          quoted_collocation = '"' + collocation + '"'
+          limit = 8
+          offset = offset || 0
 
-        DB[query, quoted_collocation, limit, offset].to_a
-          .map do |h|
-            h[:sentence].sub(collocation) { "<mark>#{collocation}</mark>" }
-          end
+          DB[query, quoted_collocation, limit, offset].to_a
+            .map do |h|
+              h[:sentence].sub(collocation) { "<mark>#{collocation}</mark>" }
+            end
+        else
+          []
+        end
       end
     end
   end
