@@ -14,6 +14,7 @@ module La
       include JSON
 
       post do
+        p json
         collocation, offset = json.values_at 'collocation', 'offset'
 
         if collocation
@@ -23,8 +24,9 @@ module La
           offset = offset || 0
 
           DB[query, quoted_collocation, limit, offset].to_a
-            .map do |h|
-              h[:sentence].sub(collocation) { "<mark>#{collocation}</mark>" }
+            .map.with_index(offset) do |h, i|
+              sentence = h[:sentence].sub(collocation) { "<mark>#{collocation}</mark>" }
+              "<b>#{i}</b></br>#{sentence}"
             end
         else
           []

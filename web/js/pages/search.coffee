@@ -26,7 +26,7 @@ angular.module 'Search', ['infinite-scroll']
       loadMore: ->
         query =
           collocation: data.collocation
-          offset: (data.models.sentences.length+1)
+          offset: data.models.sentences.length
 
         http.post('/api/sentences', query)
           .then (response) ->
