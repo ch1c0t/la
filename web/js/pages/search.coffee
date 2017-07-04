@@ -39,7 +39,9 @@ angular.module 'Search', ['infinite-scroll']
 
     (s, ajax) ->
       s.find = (collocation) ->
+        s.scrollDisabled = yes
         ajax.find collocation
+        s.scrollDisabled = no
   ]
 
   .controller 'ItemsCtrl', [
