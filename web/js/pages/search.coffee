@@ -1,6 +1,23 @@
-#=require angular
-#=require ngInfiniteScroll
+window.find = (element) ->
+  fetch '/api/sentences',
+    method: 'post'
+    headers:
+      'Content-Type': 'application/json'
+      'Accept': 'application/json'
+    body: (JSON.stringify collocation: element.value)
+    
+  .then (response) -> response.json()
+  .then (sentences) ->
+    items = document.getElementById 'items'
+    items.innerHTML = sentences.map (sentence) ->
+      "<div class='item'>#{sentence}</div>"
+    .join ''
+  .catch (error) ->
+    console.log error
 
+
+
+###
 angular.module 'Search', ['infinite-scroll']
   .factory 'Data', [
     ->
@@ -59,3 +76,4 @@ angular.module 'Search', ['infinite-scroll']
 
     (sce) -> sce.trustAsHtml
   ]
+###

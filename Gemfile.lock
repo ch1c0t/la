@@ -1,6 +1,5 @@
 GEM
   remote: https://rubygems.org/
-  remote: https://rails-assets.org/
   specs:
     awesome_print (1.8.0)
     coderay (1.1.1)
@@ -12,7 +11,7 @@ GEM
     execjs (2.7.0)
     foundation-scss (6.3.1.0)
       sass_paths
-    hobby (0.0.10)
+    hobby (0.0.11)
       rack
     hobby-json (0.0.4)
       rack
@@ -30,13 +29,10 @@ GEM
       slop (~> 3.4)
     puma (3.9.1)
     rack (2.0.3)
-    rails-assets-angular (1.6.4)
-    rails-assets-ngInfiniteScroll (1.3.4)
-      rails-assets-angular (>= 1.2.0)
     sass (3.4.24)
     sass_paths (2.0.0)
       sass (~> 3.2)
-    sequel (4.47.0)
+    sequel (4.48.0)
     slim (3.0.8)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 1.3.3, < 2.1)
@@ -58,8 +54,6 @@ DEPENDENCIES
   hobby-pages!
   pry!
   puma!
-  rails-assets-angular!
-  rails-assets-ngInfiniteScroll!
   sequel!
   sqlite3!
 

@@ -11,8 +11,3 @@ source 'https://rubygems.org' do
   gem 'pry'
   gem 'awesome_print'
 end
-
-source 'https://rails-assets.org' do
-  gem 'rails-assets-angular'
-  gem 'rails-assets-ngInfiniteScroll'
-end

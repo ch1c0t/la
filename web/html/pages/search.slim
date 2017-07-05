@@ -1,15 +1,7 @@
-div ng-app="Search"
-  div ng-controller="QueryCtrl"
-    input#search{
-      autofocus
-      placeholder="input your collocation here"
-      ng-model="collocation"
-      ng-change="find(collocation)"
-    }
+input#search{
+  autofocus
+  placeholder="input your collocation here"
+  oninput="find(this)"
+}
 
-  div ng-controller="ItemsCtrl"
-    .div infinite-scroll="loadMore()" infinite-scroll-disabled="scrollDisabled"
-      .item{
-        ng-repeat="sentence in models.sentences"
-        ng-bind-html="sentence | html"
-      }
+#items
