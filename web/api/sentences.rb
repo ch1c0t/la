@@ -29,7 +29,8 @@ module La
               "<b>#{i}</b></br>#{sentence}"
             end
         else
-          []
+          response.status = 422
+          "The required field 'collocation' is missing in the JSON body."
         end
       end
     end
