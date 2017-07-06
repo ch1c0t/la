@@ -3,15 +3,13 @@ window.find = (element) ->
     method: 'post'
     headers:
       'Content-Type': 'application/json'
-      'Accept': 'application/json'
+      'Accept': 'application/html'
     body: (JSON.stringify collocation: element.value)
     
-  .then (response) -> response.json()
+  .then (response) -> response.text()
   .then (sentences) ->
     items = document.getElementById 'items'
-    items.innerHTML = sentences.map (sentence) ->
-      "<div class='item'>#{sentence}</div>"
-    .join ''
+    items.innerHTML = sentences
   .catch (error) ->
     console.log error
 

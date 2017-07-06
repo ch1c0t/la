@@ -1,5 +1,4 @@
 require 'hobby'
-require 'hobby/json'
 
 require 'sequel'
 
@@ -11,10 +10,9 @@ module La
   module Web
     class Sentences
       include Hobby
-      include JSON
 
       post do
-        p json
+        json = ::JSON.parse request.body.read
         collocation, offset = json.values_at 'collocation', 'offset'
 
         if collocation
@@ -26,8 +24,9 @@ module La
           DB[query, quoted_collocation, limit, offset].to_a
             .map.with_index(offset) do |h, i|
               sentence = h[:sentence].sub(collocation) { "<mark>#{collocation}</mark>" }
-              "<b>#{i}</b></br>#{sentence}"
-            end
+              sentence_with_index = "<b>#{i}</b></br>#{sentence}"
+              "<div class='item'>#{sentence_with_index}</div>"
+            end.join
         else
           response.status = 422
           "The required field 'collocation' is missing in the JSON body."
